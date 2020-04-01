@@ -1,0 +1,8 @@
+type Mutation {
+  wakeUpClock(
+    wakeUpTime: Int!
+    todayYear: Int!
+    todayMonth: Int!
+    todayDate: Int!
+  ): Clock!
+}

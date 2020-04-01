@@ -1,0 +1,11 @@
+type Mutation {
+  historyUpload(
+    title: String!
+    caption: String
+    files: [String!]
+    assortment: String!
+    goalHistoryId: String!
+    postPrivate: Boolean!
+    goalId: String!
+  ): Post!
+}

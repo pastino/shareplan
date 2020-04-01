@@ -1,0 +1,14 @@
+type Mutation {
+  snsCreateAccount(
+    userId: String!
+    nickname: String!
+    dateOfBirth: Int!
+    gender: String!
+    useTermsPrivacyagreement: Boolean!
+    snsLogin: String!
+  ): String!
+}
+
+type Query {
+  somthing: String
+}

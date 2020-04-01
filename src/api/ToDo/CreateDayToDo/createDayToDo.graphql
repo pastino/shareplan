@@ -1,0 +1,7 @@
+type Mutation {
+  createDayToDo(
+    monthDay: String!
+    toDoList: String!
+    importEvent: Boolean!
+  ): DayToDo!
+}

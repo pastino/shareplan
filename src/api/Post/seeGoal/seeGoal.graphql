@@ -1,0 +1,3 @@
+type Query {
+  seeGoal(goalId: String!): Goal!
+}

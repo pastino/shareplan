@@ -1,0 +1,11 @@
+type Mutation {
+  editGoalCard(
+    goalId: String!
+    goalText: String
+    dDay: String
+    category: String
+    detailCategory: String
+    cardColor: String
+    cardPrivate: Boolean
+  ): Goal!
+}

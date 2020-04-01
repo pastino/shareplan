@@ -1,0 +1,7 @@
+type Mutation {
+  createTalkRepply(
+    text: String!
+    talkCommentId: String!
+    talkId: String!
+  ): TalkRepply!
+}

@@ -1,0 +1,8 @@
+type Mutation {
+  editToDo(
+    id: String!
+    toDoList: String
+    importEvent: Boolean!
+    complete: Boolean
+  ): DayToDo!
+}

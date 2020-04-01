@@ -1,0 +1,8 @@
+type Mutation {
+  editPost(
+    id: String!
+    caption: String
+    title: String
+    postPrivate: Boolean
+  ): Post!
+}

@@ -1,0 +1,3 @@
+type Mutation {
+  deleteGoalCard(goalId: String!): Boolean!
+}

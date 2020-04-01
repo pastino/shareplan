@@ -1,0 +1,9 @@
+type Query {
+  searchCard(
+    term: String!
+    tab: String!
+    items: Int!
+    pageNumber: Int!
+    ordering: String!
+  ): [Goal!]!
+}

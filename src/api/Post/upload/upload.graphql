@@ -1,0 +1,11 @@
+type Mutation {
+  upload(
+    title: String!
+    caption: String!
+    files: [String!]
+    assortment: String!
+    goalInformationId: String!
+    postPrivate: Boolean!
+    goalId: String!
+  ): Post!
+}

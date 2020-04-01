@@ -1,0 +1,8 @@
+type Query {
+  seeMainFeed(
+    pageNumber: Int!
+    items: Int!
+    filtering: String!
+    ordering: String!
+  ): [Goal!]!
+}

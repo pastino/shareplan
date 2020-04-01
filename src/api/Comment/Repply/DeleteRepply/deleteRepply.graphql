@@ -1,0 +1,3 @@
+type Mutation {
+  deleteRepply(repplyId: String!): Boolean!
+}

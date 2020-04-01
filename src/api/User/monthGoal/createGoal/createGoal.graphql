@@ -1,0 +1,10 @@
+type Mutation {
+  createGoal(
+    goalText: String!
+    category: String
+    detailCategory: String
+    cardColor: String!
+    dDay: String!
+    cardPrivate: Boolean!
+  ): Boolean!
+}

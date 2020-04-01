@@ -1,0 +1,13 @@
+enum ACTIONS {
+  EDIT
+  DELETE
+}
+
+type Mutation {
+  changeMonthGoal(
+    goalId: String!
+    goalText: String!
+    dDay: Int!
+    action: ACTIONS!
+  ): Goal!
+}

@@ -1,0 +1,3 @@
+type Mutation {
+  scheduleChangeToDo(dayToDoId: String!, monthDay: String!): DayToDo!
+}
