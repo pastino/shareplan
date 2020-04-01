@@ -5,17 +5,6 @@
   "main": "index.js",
   "author": "Kim taejun",
   "license": "MIT",
-  "scripts": {
-    "deploy": "prisma deploy",
-    "generate": "prisma generate",
-    "prisma": "yarn deploy && yarn generate",
-    "dev": "nodemon --exec babel-node ./src/server.js",
-    "prebuild": "yarn run prisma",
-    "build": "babel src -d build",
-    "postbuild": "cd src && npx copy ./api/**/**/**/*.graphql ../build/api/ && npx copy ./api/**/**/*.graphql ../build/api/ && npx copy ./api/**/*.graphql ../build/api/ && npx copy ./api/*.graphql ../build/api/",
-    "prestart": "yarn run build",
-    "start": "node build/server.js"
-  },
   "dependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.0",
@@ -44,5 +33,16 @@
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.9.0",
     "nodemon": "^2.0.2"
+  },
+  "scripts": {
+    "deploy": "prisma deploy",
+    "generate": "prisma generate",
+    "prisma": "yarn deploy && yarn generate",
+    "dev": "nodemon --exec babel-node ./src/server.js",
+    "prebuild": "yarn run prisma",
+    "build": "babel src -d build",
+    "postbuild": "cd src && npx copy ./api/**/**/**/*.graphql ../build/api/ && npx copy ./api/**/**/*.graphql ../build/api/ && npx copy ./api/**/*.graphql ../build/api/ && npx copy ./api/*.graphql ../build/api/",
+    "prestart": "yarn run build",
+    "start": "node build/server.js"
   }
 }
