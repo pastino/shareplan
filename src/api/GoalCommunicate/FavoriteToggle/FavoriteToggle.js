@@ -28,7 +28,7 @@ export default {
             data: {
               favorites: { disconnect: { id: user.id } },
               favoriteCounts:
-                currentFavoriteCount === 1 ? null : currentFavoriteCount - 1,
+                currentFavoriteCount === 1 ? 0 : currentFavoriteCount - 1,
             },
           });
         }

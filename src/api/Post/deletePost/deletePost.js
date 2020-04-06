@@ -5,26 +5,32 @@ export default {
   Mutation: {
     deletePost: async (_, args, { request }) => {
       isAuthenticated(request);
-      const { id } = args;
+      const { id, goalId, latestCreatedAt } = args;
       const { user } = request;
       const verify = await prisma.$exists.post({
         AND: [
           {
-            user: { id: user.id }
+            user: { id: user.id },
           },
-          { id }
-        ]
+          { id },
+        ],
       });
       try {
         if (verify) {
           await prisma.deletePost({
-            id
+            id,
+          });
+          await prisma.updateGoal({
+            where: { id: goalId },
+            data: {
+              postUploadDate: latestCreatedAt,
+            },
           });
         }
         return true;
       } catch (e) {
         console.log(e);
       }
-    }
-  }
+    },
+  },
 };

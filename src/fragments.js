@@ -86,6 +86,8 @@ export const GOAL_FRAGMENT = `
     }
     posts{
       id
+      createdAt
+      postPrivate
     }
     goalInformations {
       id

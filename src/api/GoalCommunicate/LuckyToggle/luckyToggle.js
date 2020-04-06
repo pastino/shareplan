@@ -27,8 +27,7 @@ export default {
             where: { id: goalId },
             data: {
               luckies: { disconnect: { id: user.id } },
-              luckyCounts:
-                currentLuckyCount === 1 ? null : currentLuckyCount - 1,
+              luckyCounts: currentLuckyCount === 1 ? 0 : currentLuckyCount - 1,
             },
           });
         }

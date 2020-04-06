@@ -8,6 +8,7 @@ export default {
       isAuthenticated(request);
       const { pageNumber, items, filtering, ordering } = args;
       const { user } = request;
+      console.log(filtering, ordering);
       try {
         if (filtering === "전체") {
           return prisma
@@ -19,13 +20,13 @@ export default {
               skip: pageNumber,
               orderBy:
                 ordering === "업로드"
-                  ? "postUploadDate_ASC"
+                  ? "postUploadDate_DESC"
                   : ordering === "추천"
-                  ? "excellentCounts_ASC"
+                  ? "excellentCounts_DESC"
                   : ordering === "클로버"
-                  ? "luckyCounts_ASC"
+                  ? "luckyCounts_DESC"
                   : ordering === "즐겨찾기"
-                  ? "favoriteCounts_ASC"
+                  ? "favoriteCounts_DESC"
                   : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);
@@ -45,13 +46,13 @@ export default {
               skip: pageNumber,
               orderBy:
                 ordering === "업로드"
-                  ? "postUploadDate_ASC"
+                  ? "postUploadDate_DESC"
                   : ordering === "추천"
-                  ? "excellentCounts_ASC"
+                  ? "excellentCounts_DESC"
                   : ordering === "클로버"
-                  ? "luckyCounts_ASC"
+                  ? "luckyCounts_DESC"
                   : ordering === "즐겨찾기"
-                  ? "favoriteCounts_ASC"
+                  ? "favoriteCounts_DESC"
                   : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);
@@ -69,13 +70,13 @@ export default {
               skip: pageNumber,
               orderBy:
                 ordering === "업로드"
-                  ? "postUploadDate_ASC"
+                  ? "postUploadDate_DESC"
                   : ordering === "추천"
-                  ? "excellentCounts_ASC"
+                  ? "excellentCounts_DESC"
                   : ordering === "클로버"
-                  ? "luckyCounts_ASC"
+                  ? "luckyCounts_DESC"
                   : ordering === "즐겨찾기"
-                  ? "favoriteCounts_ASC"
+                  ? "favoriteCounts_DESC"
                   : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);
@@ -93,13 +94,13 @@ export default {
               skip: pageNumber,
               orderBy:
                 ordering === "업로드"
-                  ? "postUploadDate_ASC"
+                  ? "postUploadDate_DESC"
                   : ordering === "추천"
-                  ? "excellentCounts_ASC"
+                  ? "excellentCounts_DESC"
                   : ordering === "클로버"
-                  ? "luckyCounts_ASC"
+                  ? "luckyCounts_DESC"
                   : ordering === "즐겨찾기"
-                  ? "favoriteCounts_ASC"
+                  ? "favoriteCounts_DESC"
                   : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);

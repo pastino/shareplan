@@ -12,7 +12,7 @@ export default {
         assortment,
         goalHistoryId,
         goalId,
-        postPrivate
+        postPrivate,
       } = args;
       const { user } = request;
       const post = await prisma.createPost({
@@ -22,14 +22,14 @@ export default {
         caption,
         postPrivate,
         goal: { connect: { id: goalId } },
-        user: { connect: { id: user.id } }
+        user: { connect: { id: user.id } },
       });
       const date = new Date();
       try {
         if (postPrivate === true) {
           await prisma.updateGoal({
             where: { id: goalId },
-            data: { postUploadDate: date }
+            data: { postUploadDate: date },
           });
         }
       } catch (e) {
@@ -37,10 +37,10 @@ export default {
       }
       try {
         if (files && files.length > 0) {
-          files.forEach(async file => {
+          files.forEach(async (file) => {
             await prisma.createFile({
               url: file,
-              post: { connect: { id: post.id } }
+              post: { connect: { id: post.id } },
             });
           });
         }
@@ -48,6 +48,6 @@ export default {
         console.log(e);
       }
       return post;
-    }
-  }
+    },
+  },
 };

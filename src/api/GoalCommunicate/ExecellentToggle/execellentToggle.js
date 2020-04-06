@@ -28,7 +28,7 @@ export default {
             data: {
               excellents: { disconnect: { id: user.id } },
               excellentCounts:
-                currentExcellentCount === 1 ? null : currentExcellentCount - 1,
+                currentExcellentCount === 1 ? 0 : currentExcellentCount - 1,
             },
           });
         }
