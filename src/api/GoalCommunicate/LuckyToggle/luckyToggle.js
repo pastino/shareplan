@@ -9,7 +9,7 @@ export default {
       const { user } = request;
       const currentLuckyCount = await prisma
         .usersConnection({
-          where: { luckies_some: { id: goalId } }
+          where: { luckies_some: { id: goalId } },
         })
         .aggregate()
         .count();
@@ -19,16 +19,17 @@ export default {
             where: { id: goalId },
             data: {
               luckies: { connect: { id: user.id } },
-              luckyCounts: currentLuckyCount + 1
-            }
+              luckyCounts: currentLuckyCount + 1,
+            },
           });
         } else {
           await prisma.updateGoal({
             where: { id: goalId },
             data: {
               luckies: { disconnect: { id: user.id } },
-              luckyCounts: currentLuckyCount - 1
-            }
+              luckyCounts:
+                currentLuckyCount === 1 ? null : currentLuckyCount - 1,
+            },
           });
         }
         const me = await prisma.user({ id: user.id });
@@ -36,6 +37,6 @@ export default {
       } catch (e) {
         console.log(e);
       }
-    }
-  }
+    },
+  },
 };

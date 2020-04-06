@@ -8,26 +8,25 @@ export default {
       isAuthenticated(request);
       const { pageNumber, items, filtering, ordering } = args;
       const { user } = request;
-
       try {
         if (filtering === "전체") {
           return prisma
             .goals({
               where: {
-                AND: [{ user: { id_not: user.id } }, { cardPrivate: true }]
+                AND: [{ user: { id_not: user.id } }, { cardPrivate: true }],
               },
               first: items,
               skip: pageNumber,
               orderBy:
                 ordering === "업로드"
-                  ? "postUploadDate_DESC"
+                  ? "postUploadDate_ASC"
                   : ordering === "추천"
-                  ? "excellentCounts_DESC"
+                  ? "excellentCounts_ASC"
                   : ordering === "클로버"
-                  ? "luckyCounts_DESC"
+                  ? "luckyCounts_ASC"
                   : ordering === "즐겨찾기"
-                  ? "favoriteCounts_DESC"
-                  : null
+                  ? "favoriteCounts_ASC"
+                  : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);
         } else if (filtering === "소울링") {
@@ -37,23 +36,23 @@ export default {
               where: {
                 AND: [
                   {
-                    user: { id_in: [...souling.map(user => user.id)] }
+                    user: { id_in: [...souling.map((user) => user.id)] },
                   },
-                  { cardPrivate: true }
-                ]
+                  { cardPrivate: true },
+                ],
               },
               first: items,
               skip: pageNumber,
               orderBy:
                 ordering === "업로드"
-                  ? "postUploadDate_DESC"
+                  ? "postUploadDate_ASC"
                   : ordering === "추천"
-                  ? "excellentCounts_DESC"
+                  ? "excellentCounts_ASC"
                   : ordering === "클로버"
-                  ? "luckyCounts_DESC"
+                  ? "luckyCounts_ASC"
                   : ordering === "즐겨찾기"
-                  ? "favoriteCounts_DESC"
-                  : null
+                  ? "favoriteCounts_ASC"
+                  : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);
         } else if (filtering === "완료") {
@@ -63,21 +62,21 @@ export default {
                 AND: [
                   { user: { id_not: user.id } },
                   { cardPrivate: true },
-                  { complete: true }
-                ]
+                  { complete: true },
+                ],
               },
               first: items,
               skip: pageNumber,
               orderBy:
                 ordering === "업로드"
-                  ? "postUploadDate_DESC"
+                  ? "postUploadDate_ASC"
                   : ordering === "추천"
-                  ? "excellentCounts_DESC"
+                  ? "excellentCounts_ASC"
                   : ordering === "클로버"
-                  ? "luckyCounts_DESC"
+                  ? "luckyCounts_ASC"
                   : ordering === "즐겨찾기"
-                  ? "favoriteCounts_DESC"
-                  : null
+                  ? "favoriteCounts_ASC"
+                  : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);
         } else if (filtering === "즐겨찾기") {
@@ -87,27 +86,27 @@ export default {
                 AND: [
                   { user: { id_not: user.id } },
                   { cardPrivate: true },
-                  { favorites_some: { id: user.id } }
-                ]
+                  { favorites_some: { id: user.id } },
+                ],
               },
               first: items,
               skip: pageNumber,
               orderBy:
                 ordering === "업로드"
-                  ? "postUploadDate_DESC"
+                  ? "postUploadDate_ASC"
                   : ordering === "추천"
-                  ? "excellentCounts_DESC"
+                  ? "excellentCounts_ASC"
                   : ordering === "클로버"
-                  ? "luckyCounts_DESC"
+                  ? "luckyCounts_ASC"
                   : ordering === "즐겨찾기"
-                  ? "favoriteCounts_DESC"
-                  : null
+                  ? "favoriteCounts_ASC"
+                  : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);
         }
       } catch (e) {
         console.log(e);
       }
-    }
-  }
+    },
+  },
 };

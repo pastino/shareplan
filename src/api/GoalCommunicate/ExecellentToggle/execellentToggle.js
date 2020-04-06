@@ -9,7 +9,7 @@ export default {
       const { user } = request;
       const currentExcellentCount = await prisma
         .usersConnection({
-          where: { excellents_some: { id: goalId } }
+          where: { excellents_some: { id: goalId } },
         })
         .aggregate()
         .count();
@@ -19,16 +19,17 @@ export default {
             where: { id: goalId },
             data: {
               excellents: { connect: { id: user.id } },
-              excellentCounts: currentExcellentCount + 1
-            }
+              excellentCounts: currentExcellentCount + 1,
+            },
           });
         } else {
           await prisma.updateGoal({
             where: { id: goalId },
             data: {
               excellents: { disconnect: { id: user.id } },
-              excellentCounts: currentExcellentCount - 1
-            }
+              excellentCounts:
+                currentExcellentCount === 1 ? null : currentExcellentCount - 1,
+            },
           });
         }
         const me = await prisma.user({ id: user.id });
@@ -36,6 +37,6 @@ export default {
       } catch (e) {
         console.log(e);
       }
-    }
-  }
+    },
+  },
 };

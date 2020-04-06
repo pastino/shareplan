@@ -9,7 +9,7 @@ export default {
       const { user } = request;
       const currentFavoriteCount = await prisma
         .usersConnection({
-          where: { favorites_some: { id: goalId } }
+          where: { favorites_some: { id: goalId } },
         })
         .aggregate()
         .count();
@@ -19,16 +19,17 @@ export default {
             where: { id: goalId },
             data: {
               favorites: { connect: { id: user.id } },
-              favoriteCounts: currentFavoriteCount + 1
-            }
+              favoriteCounts: currentFavoriteCount + 1,
+            },
           });
         } else {
           await prisma.updateGoal({
             where: { id: goalId },
             data: {
               favorites: { disconnect: { id: user.id } },
-              favoriteCounts: currentFavoriteCount - 1
-            }
+              favoriteCounts:
+                currentFavoriteCount === 1 ? null : currentFavoriteCount - 1,
+            },
           });
         }
         const me = await prisma.user({ id: user.id });
@@ -36,6 +37,6 @@ export default {
       } catch (e) {
         console.log(e);
       }
-    }
-  }
+    },
+  },
 };

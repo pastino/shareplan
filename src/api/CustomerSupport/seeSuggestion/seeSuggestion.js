@@ -8,6 +8,7 @@ export default {
     seeSuggestion: (_, __, { request }) => {
       isAuthenticated(request);
       const { user } = request;
+
       if (user.userId === process.env.OPERATOR_ID) {
         return prisma.suggestions().$fragment(SUGGESTION_FRAGMENT);
       }
