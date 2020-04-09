@@ -13,10 +13,10 @@ export default {
           // first: limit,
           // skip: offset,
           where: {
-            post: { id: postId }
-          }
+            post: { id: postId },
+          },
         })
         .$fragment(COMMENT_FRAGMENT);
-    }
-  }
+    },
+  },
 };

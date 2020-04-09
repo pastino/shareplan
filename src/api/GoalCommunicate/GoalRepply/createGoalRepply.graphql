@@ -1,0 +1,7 @@
+type Mutation {
+  createGoalRepply(
+    text: String!
+    commentId: String!
+    goalId: String!
+  ): GoalRepply!
+}

@@ -9,9 +9,9 @@ export default {
         AND: [
           { id: user.id },
           {
-            following_some: { id }
-          }
-        ]
+            following_some: { id },
+          },
+        ],
       });
     },
     isSelf: (parent, _, { request }) => {
@@ -19,7 +19,7 @@ export default {
       const { user } = request;
       return id === user.id;
     },
-    postCounts: parent => {
+    postCounts: (parent) => {
       const { id } = parent;
       return prisma
         .postsConnection({
@@ -27,33 +27,47 @@ export default {
             AND: [
               { user: { id } },
               { goal: { cardPrivate: true } },
-              { postPrivate: true }
-            ]
-          }
+              { postPrivate: true },
+            ],
+          },
         })
         .aggregate()
         .count();
     },
-    goalCounts: parent => {
+    goalCounts: (parent) => {
       const { id } = parent;
       return prisma
         .goalsConnection({
-          where: { AND: [{ user: { id } }, { cardPrivate: true }] }
+          where: { AND: [{ user: { id } }, { cardPrivate: true }] },
         })
         .aggregate()
         .count();
-    }
+    },
   },
   Goal: {
-    excellentCounts: parent => {
+    excellentCounts: (parent) => {
       const { id } = parent;
       return prisma
         .usersConnection({
-          where: { excellents_some: { id } }
+          where: { excellents_some: { id } },
         })
         .aggregate()
         .count();
-    }
+    },
+    goalCommentsCount: (parent) => {
+      const { id } = parent;
+      return prisma
+        .goalCommentsConnection({ where: { goal: { id } } })
+        .aggregate()
+        .count();
+    },
+    goalReppliesCount: (parent) => {
+      const { id } = parent;
+      return prisma
+        .goalReppliesConnection({ where: { goal: { id } } })
+        .aggregate()
+        .count();
+    },
   },
   Post: {
     isLiked: (parent, _, { request }) => {
@@ -63,47 +77,47 @@ export default {
         AND: [
           { user: { id: user.id } },
           {
-            post: { id }
-          }
-        ]
+            post: { id },
+          },
+        ],
       });
     },
-    likeCount: parent => {
+    likeCount: (parent) => {
       const { id } = parent;
       return prisma
         .likesConnection({ where: { post: { id } } })
         .aggregate()
         .count();
     },
-    commentCounts: parent => {
+    commentCounts: (parent) => {
       const { id } = parent;
       return prisma
         .commentsConnection({ where: { post: { id } } })
         .aggregate()
         .count();
     },
-    repplyCounts: parent => {
+    repplyCounts: (parent) => {
       const { id } = parent;
       return prisma
         .reppliesConnection({ where: { post: { id } } })
         .aggregate()
         .count();
-    }
+    },
   },
   Talk: {
-    talkCommentCounts: parent => {
+    talkCommentCounts: (parent) => {
       const { id } = parent;
       return prisma
         .talkCommentsConnection({ where: { talk: { id } } })
         .aggregate()
         .count();
     },
-    talkRepplyCounts: parent => {
+    talkRepplyCounts: (parent) => {
       const { id } = parent;
       return prisma
         .talkReppliesConnection({ where: { talk: { id } } })
         .aggregate()
         .count();
-    }
-  }
+    },
+  },
 };

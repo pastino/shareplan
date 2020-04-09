@@ -15,10 +15,9 @@ export default {
           { id },
         ],
       });
-      console.log(postPrivate, goalId, latestCreatedAt);
       if (verify) {
-        if (postPrivate === true || (goalId && latestCreatedAt)) {
-          console.log(11);
+        if (goalId && latestCreatedAt) {
+          console.log();
           await prisma.updateGoal({
             where: { id: goalId },
             data: { postUploadDate: latestCreatedAt },

@@ -9,14 +9,14 @@ export default {
       const { user } = request;
       const { toDoId, complete } = args;
       const findToDoId = await prisma.$exists.dayToDo({
-        id: toDoId
+        id: toDoId,
       });
       try {
         if (findToDoId) {
           const completeToDo = await prisma
             .updateDayToDo({
               where: { id: toDoId },
-              data: { complete }
+              data: { complete },
             })
             .$fragment(DAYTODO_FRAGMENT);
           return completeToDo;
@@ -24,6 +24,6 @@ export default {
       } catch (e) {
         console.log(e);
       }
-    }
-  }
+    },
+  },
 };

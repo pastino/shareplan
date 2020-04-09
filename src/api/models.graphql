@@ -22,6 +22,8 @@ type User {
   likes: [Like!]!
   comments: [Comment!]!
   goalCounts: Int
+  goalComments: [GoalComment!]!
+  goalRepplies: [GoalRepply!]!
   excellents: [Goal!]!
   favorites: [Goal!]!
   luckies: [Goal!]!
@@ -90,18 +92,43 @@ type Goal {
   detailPlans: DetailPlan
   category: String
   detailCategory: String
+  goalComments: [GoalComment!]!
+  goalCommentsCount: Int
+  goalRepplies: [GoalRepply!]!
+  goalReppliesCount: Int
   excellents: [User!]!
   favorites: [User!]!
   luckies: [User!]!
   cardColor: String!
   password: Int
   cardPrivate: Boolean!
+  viewCounts: Int
   complete: Boolean
   completeDate: String
   postUploadDate: String
   excellentCounts: Int!
   luckyCounts: Int!
   favoriteCounts: Int!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type GoalComment {
+  id: ID!
+  text: String!
+  user: User
+  goal: Goal!
+  repply: [GoalRepply!]!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type GoalRepply {
+  id: ID!
+  text: String!
+  user: User
+  goal: Goal!
+  comment: GoalComment!
   createdAt: String!
   updatedAt: String!
 }
@@ -136,6 +163,7 @@ type DayToDo {
   toDoList: String!
   complete: Boolean
   importEvent: Boolean!
+  index: Int
   createdAt: String!
   updatedAt: String!
 }

@@ -1,3 +1,3 @@
 type Mutation {
-  completeToDo(toDoId: String!, complete: Boolean!): DayToDo!
+  completeToDo(toDoId: String!, complete: Boolean!, index: Int): DayToDo!
 }

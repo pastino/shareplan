@@ -1,0 +1,7 @@
+type Query {
+  seeGoalComment(
+    goalId: String!
+    pageNumber: Int!
+    items: Int!
+  ): [GoalComment!]!
+}

@@ -18,7 +18,9 @@ type User {
   posts: [Post!]! @relation(name: "PostsOfUser" onDelete:CASCADE)
   postCounts: Int
   goals: [Goal!]! @relation(name: "GoalsOfUser" onDelete:CASCADE)
-  goalCounts: Int
+  goalCounts: Int   
+  goalComments: [GoalComment!]! @relation(name: "GoalCommentOfUser" onDelete:CASCADE)
+  goalRepplies: [GoalRepply!]! @relation(name: "GoalRepplyOfUser" onDelete:CASCADE)
   excellents: [Goal!]! @relation(name: "ExcellentOfUser" onDelete:CASCADE)
   favorites: [Goal!]! @relation(name: "FavoriteOfUser" onDelete:CASCADE)
   luckies: [Goal!]! @relation(name: "LuckyOfUser" onDelete:CASCADE)
@@ -91,6 +93,10 @@ type Goal {
   detailPlans: DetailPlan @relation(link: TABLE, name: "PlanOfGoal" onDelete:CASCADE)
   category: String
   detailCategory: String
+  goalComments: [GoalComment!]! @relation(name: "CommentsOfGoal" onDelete: CASCADE)
+  goalCommentsCount: Int
+  goalRepplies: [GoalRepply!]! @relation(name: "ReppliesOfGoal" onDelete: CASCADE)
+  goalReppliesCount: Int
   excellents: [User!]! @relation(name: "ExcellentOfUser")
   favorites : [User!]! @relation(name: "FavoriteOfUser")
   luckies: [User!]! @relation(name: "LuckyOfUser")
@@ -101,8 +107,30 @@ type Goal {
   completeDate: String
   postUploadDate: DateTime
   excellentCounts: Int
+  viewCounts: Int
   luckyCounts: Int
   favoriteCounts: Int
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+
+type GoalComment {
+  id: ID! @id 
+  text: String!
+  user: User @relation(name: "GoalCommentOfUser")
+  goal: Goal! @relation(name: "CommentsOfGoal")
+  repply: [GoalRepply!]! @relation(name: "ReppliesOfGoalComment" onDelete:CASCADE)
+  createdAt: DateTime! @createdAt 
+  updatedAt: DateTime! @updatedAt
+}
+
+type GoalRepply {
+  id: ID! @id 
+  text: String!
+  user: User  @relation(name: "GoalRepplyOfUser")
+  goal: Goal! @relation(name: "ReppliesOfGoal")
+  comment: GoalComment! @relation(name: "ReppliesOfGoalComment")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -137,6 +165,7 @@ type DayToDo {
   toDoList: String!
   complete: Boolean!
   importEvent: Boolean!
+  index: Int
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

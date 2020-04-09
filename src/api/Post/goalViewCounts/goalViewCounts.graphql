@@ -1,0 +1,3 @@
+type Mutation {
+  goalViewCounts(goalId: String!): Goal!
+}

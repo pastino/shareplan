@@ -11,9 +11,9 @@ export default {
       return prisma
         .updateDayToDo({
           where: { id: dayToDoId },
-          data: { monthDay }
+          data: { monthDay, index: 1000 },
         })
         .$fragment(DAYTODO_FRAGMENT);
-    }
-  }
+    },
+  },
 };

@@ -123,6 +123,7 @@ export const GOAL_FRAGMENT = `
         nickname
         avatar
       }
+      viewCounts
       excellentCounts
       luckyCounts
       favoriteCounts
@@ -362,6 +363,9 @@ export const FULL_CARD_FRAGMENT = `
         nickname
         avatar
       }
+      viewCounts
+      goalCommentsCount
+      goalReppliesCount
       excellentCounts
       luckyCounts
       favoriteCounts
@@ -434,6 +438,9 @@ export const SEE_USER_FRAGMENT = `
             id
           }
           category
+          viewCounts
+          goalCommentsCount
+          goalReppliesCount
           detailCategory
           cardColor
           complete
@@ -588,6 +595,7 @@ export const DAYTODO_FRAGMENT = `
         }
         toDoList
         complete
+        index
         importEvent
         createdAt
         updatedAt
@@ -595,19 +603,67 @@ export const DAYTODO_FRAGMENT = `
 `;
 
 export const SUGGESTION_FRAGMENT = `
-fragment SuggestionParts on Suggestion {
-    id
-    user {
+  fragment SuggestionParts on Suggestion {
       id
-      userId
-      nickname
-      avatar
-      gender
-      dateOfBirth
+      user {
+        id
+        userId
+        nickname
+        avatar
+        gender
+        dateOfBirth
+      }
+      text
+      image
+      createdAt
+      updatedAt
     }
-    text
-    image
-    createdAt
-    updatedAt
+`;
+
+export const GOAL_COMMENT_FRAGMENT = `
+  fragment GoalCommentParts on GoalComment {
+      id
+      text
+      user {
+        id
+        nickname
+        avatar
+      }
+      goal {
+        id
+      }
+      repply {
+        id
+        text
+        user {
+          id
+          avatar
+          nickname
+        }
+        comment {
+          id
+        }
+        createdAt
+        updatedAt
+        }
+        createdAt
+        updatedAt
+  }
+`;
+
+export const GOAL_REPPLY_FRAGMENT = `
+  fragment GoalRepplyParts on GoalRepply {
+      id
+      text
+      user {
+        id
+        avatar
+        nickname
+      }
+      comment {
+        id
+      }
+      createdAt
+      updatedAt
   }
 `;

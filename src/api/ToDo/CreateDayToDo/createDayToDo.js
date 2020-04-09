@@ -14,9 +14,10 @@ export default {
           monthDay,
           toDoList,
           importEvent,
-          complete: false
+          complete: false,
+          index: 1000,
         })
         .$fragment(DAYTODO_FRAGMENT);
-    }
-  }
+    },
+  },
 };
