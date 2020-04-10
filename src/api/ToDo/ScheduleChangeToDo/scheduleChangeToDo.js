@@ -8,10 +8,18 @@ export default {
       isAuthenticated(request);
       const { user } = request;
       const { dayToDoId, monthDay } = args;
+      const changeToDoLength = await prisma.dayToDoes({
+        where: {
+          AND: [
+            { user: { id: user.id } }, { monthDay }
+          ]
+        }
+      })
+      console.log(changeToDoLength)
       return prisma
         .updateDayToDo({
           where: { id: dayToDoId },
-          data: { monthDay, index: 1000 },
+          data: { monthDay, index: changeToDoLength.length + 1 },
         })
         .$fragment(DAYTODO_FRAGMENT);
     },

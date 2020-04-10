@@ -11,7 +11,6 @@ export default {
       const createdToDo = await prisma.dayToDoes({
         where: { monthDay, user: { id: user.id } },
       });
-
       return await prisma
         .createDayToDo({
           user: { connect: { id: user.id } },
