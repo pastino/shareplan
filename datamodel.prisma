@@ -164,7 +164,7 @@ type DayToDo {
   user: User! @relation(name: "DayToDoOfUser")
   toDoList: String!
   complete: Boolean!
-  importEvent: Boolean!
+  importEvent: String!
   index: Int
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt

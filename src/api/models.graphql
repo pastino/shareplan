@@ -162,7 +162,7 @@ type DayToDo {
   user: User!
   toDoList: String!
   complete: Boolean
-  importEvent: Boolean!
+  importEvent: String!
   index: Int
   createdAt: String!
   updatedAt: String!
