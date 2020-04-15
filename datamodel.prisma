@@ -90,7 +90,7 @@ type Goal {
   posts: [Post!]! @relation(name: "PostsOfGoal" onDelete:CASCADE)
   goalInformations: GoalInformation @relation(link: TABLE, name: "InformationOfGoal" onDelete:CASCADE)
   goalHistories: GoalHistory @relation(link: TABLE, name: "HistoryOfGoal" onDelete:CASCADE)
-  detailPlans: DetailPlan @relation(link: TABLE, name: "PlanOfGoal" onDelete:CASCADE)
+  detailPlans: [DetailPlan!] @relation(name: "PlanOfGoal" onDelete:CASCADE)
   category: String
   detailCategory: String
   goalComments: [GoalComment!]! @relation(name: "CommentsOfGoal" onDelete: CASCADE)
@@ -154,9 +154,12 @@ type GoalHistory {
 type DetailPlan {
   id: ID!@id
   goal: Goal! @relation(name: "PlanOfGoal")
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
+  stagePlanText: String!
+  startingDay: DateTime!
+  endDay: DateTime!
 }
+
+
 
 type DayToDo {
   id: ID!@id

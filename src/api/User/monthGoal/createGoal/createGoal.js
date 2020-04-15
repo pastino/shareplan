@@ -11,7 +11,7 @@ export default {
         detailCategory,
         cardColor,
         dDay,
-        cardPrivate,
+        cardPrivate
       } = args;
       const { user } = request;
       const today = new Date(0);
@@ -26,18 +26,16 @@ export default {
         luckyCounts: 0,
         favoriteCounts: 0,
         excellentCounts: 0,
-        postUploadDate: today,
+        postUploadDate: today
       });
       await prisma.createGoalInformation({
-        goal: { connect: { id: goal.id } },
+        goal: { connect: { id: goal.id } }
       });
       await prisma.createGoalHistory({
-        goal: { connect: { id: goal.id } },
+        goal: { connect: { id: goal.id } }
       });
-      await prisma.createDetailPlan({
-        goal: { connect: { id: goal.id } },
-      });
+
       return true;
-    },
-  },
+    }
+  }
 };

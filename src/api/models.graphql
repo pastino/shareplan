@@ -89,7 +89,7 @@ type Goal {
   posts: [Post!]!
   goalInformations: GoalInformation
   goalHistories: GoalHistory
-  detailPlans: DetailPlan
+  detailPlans: [DetailPlan!]
   category: String
   detailCategory: String
   goalComments: [GoalComment!]!
@@ -152,8 +152,9 @@ type GoalHistory {
 type DetailPlan {
   id: ID!
   goal: Goal!
-  createdAt: String!
-  updatedAt: String!
+  stagePlanText: String!
+  startingDay: String!
+  endDay: String!
 }
 
 type DayToDo {
