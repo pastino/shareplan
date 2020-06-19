@@ -9,19 +9,22 @@ export default {
         goalId,
         goalText,
         dDay,
+        startDate,
         category,
+        keyWord,
         detailCategory,
         cardColor,
-        cardPrivate
+        cardPrivate,
       } = args;
       const { user } = request;
+      console.log(keyWord);
       const verify = await prisma.$exists.goal({
         AND: [
           {
-            user: { id: user.id }
+            user: { id: user.id },
           },
-          { id: goalId }
-        ]
+          { id: goalId },
+        ],
       });
       if (verify) {
         return prisma.updateGoal({
@@ -29,13 +32,15 @@ export default {
           data: {
             goalText,
             dDay,
+            startDate,
             category,
             detailCategory,
             cardColor,
-            cardPrivate
-          }
+            cardPrivate,
+            keyWord,
+          },
         });
       }
-    }
-  }
+    },
+  },
 };

@@ -1,0 +1,7 @@
+type Mutation {
+  saleConfirm(
+    goalId: String!
+    saleConfirm: String!
+    saleRejectText: String
+  ): Boolean!
+}

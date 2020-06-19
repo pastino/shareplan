@@ -1,5 +1,6 @@
 import { isAuthenticated } from "../../../middleware";
 import { prisma } from "../../../../generated/prisma-client";
+import { POST_HISTORY_FRAGMENT } from "../../../fragments";
 
 export default {
   Mutation: {
@@ -13,17 +14,21 @@ export default {
         goalHistoryId,
         goalId,
         postPrivate,
+        toDoId,
       } = args;
       const { user } = request;
-      const post = await prisma.createPost({
-        goalHistory: { connect: { id: goalHistoryId } },
-        title,
-        assortment,
-        caption,
-        postPrivate,
-        goal: { connect: { id: goalId } },
-        user: { connect: { id: user.id } },
-      });
+      const post = await prisma
+        .createPost({
+          goalHistory: { connect: { id: goalHistoryId } },
+          title,
+          assortment,
+          caption,
+          postPrivate,
+          connectToDoId: toDoId,
+          goal: { connect: { id: goalId } },
+          user: { connect: { id: user.id } },
+        })
+        .$fragment(POST_HISTORY_FRAGMENT);
       const date = new Date();
       try {
         if (postPrivate === true) {

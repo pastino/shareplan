@@ -86,6 +86,7 @@ type Goal {
   id: ID! @id
   user: User! @relation(name: "GoalsOfUser" )
   goalText: String!
+  startDate: String!
   dDay: String!
   posts: [Post!]! @relation(name: "PostsOfGoal" onDelete:CASCADE)
   goalInformations: GoalInformation @relation(link: TABLE, name: "InformationOfGoal" onDelete:CASCADE)
@@ -100,7 +101,9 @@ type Goal {
   excellents: [User!]! @relation(name: "ExcellentOfUser")
   favorites : [User!]! @relation(name: "FavoriteOfUser")
   luckies: [User!]! @relation(name: "LuckyOfUser")
+  dayToDoes: [DayToDo!] @relation(name: "DayToDoOfGoal" onDelete: CASCADE)
   cardColor: String! 
+  keyWord: String
   password: Int
   cardPrivate: Boolean!
   complete: Boolean
@@ -110,6 +113,16 @@ type Goal {
   viewCounts: Int
   luckyCounts: Int
   favoriteCounts: Int
+  downloadCount: Int
+  sale: String
+  salePrice: Int
+  mainImage: String
+  introduceText: String
+  target: String
+  otherCosts: Int
+  otherCostsDesc: String
+  alramToken: String
+  saleRejectText: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -159,18 +172,29 @@ type DetailPlan {
   endDay: DateTime!
 }
 
-
-
 type DayToDo {
   id: ID!@id
-  monthDay: String!
+  startDate: String!
+  startTime: String
+  endDate: String!
+  endTime: String 
+  alrams: [Alram!] @relation(name: "DayToDoOfAlram" onDelete:CASCADE)
+  memo: String
   user: User! @relation(name: "DayToDoOfUser")
   toDoList: String!
   complete: Boolean!
-  importEvent: String!
+  color: String!
   index: Int
+  goal: Goal @relation(name: "DayToDoOfGoal")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+}
+
+type Alram {
+   id: ID!@id
+   dayToDo: DayToDo! @relation(name: "DayToDoOfAlram")
+   time: Int!
+   categoryId: Int
 }
 
 type Post {
@@ -191,6 +215,7 @@ type Post {
   assortment: String!
   goalInformation: GoalInformation @relation(name: "PostsOfInformation")
   goalHistory: GoalHistory @relation(name: "PostsOfHistory")
+  connectToDoId: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

@@ -1,0 +1,24 @@
+type Mutation {
+  download(
+    id: String!
+    toDoList: [String!]!
+    color: [String!]!
+    startDate: [String!]!
+    alrams: [[Int]]
+    alarmId: [[Int]]
+    startTime: [String]
+    endDate: [String!]!
+    endTime: [String]
+    memo: [String]
+    goalId: String
+    maxEndDate: String
+    goalText: String
+    goalStartDate: String
+    dDay: String
+    category: String
+    detailCategory: String
+    keyWord: String
+    cardColor: String
+    cardPrivate: Boolean
+  ): Boolean!
+}

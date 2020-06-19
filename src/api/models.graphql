@@ -85,10 +85,12 @@ type Goal {
   id: ID!
   user: User!
   goalText: String!
+  startDate: String!
   dDay: String!
   posts: [Post!]!
   goalInformations: GoalInformation
   goalHistories: GoalHistory
+  historyPubCount: Int
   detailPlans: [DetailPlan!]
   category: String
   detailCategory: String
@@ -97,8 +99,12 @@ type Goal {
   goalRepplies: [GoalRepply!]!
   goalReppliesCount: Int
   excellents: [User!]!
+  keyWord: String
   favorites: [User!]!
   luckies: [User!]!
+  dayToDoes: [DayToDo!]
+  dayToDoesCount: Int
+  dayToDoComCount: Int
   cardColor: String!
   password: Int
   cardPrivate: Boolean!
@@ -109,6 +115,16 @@ type Goal {
   excellentCounts: Int!
   luckyCounts: Int!
   favoriteCounts: Int!
+  downloadCount: Int
+  sale: String
+  salePrice: Int
+  target: String
+  mainImage: String
+  introduceText: String
+  otherCosts: Int
+  otherCostsDesc: String
+  alramToken: String
+  saleRejectText: String
   createdAt: String!
   updatedAt: String!
 }
@@ -159,14 +175,27 @@ type DetailPlan {
 
 type DayToDo {
   id: ID!
-  monthDay: String!
+  startDate: String!
+  startTime: String
+  endDate: String!
+  endTime: String
+  alrams: [Alram!]
+  memo: String
   user: User!
   toDoList: String!
   complete: Boolean
-  importEvent: String!
+  color: String!
   index: Int
+  goal: Goal
   createdAt: String!
   updatedAt: String!
+}
+
+type Alram {
+  id: ID!
+  time: Int!
+  dayToDo: DayToDo!
+  categoryId: Int
 }
 
 type Post {
@@ -187,6 +216,8 @@ type Post {
   isLiked: Boolean! #Computed
   goalInformation: GoalInformation
   goalHistory: GoalHistory
+  dayToDoes: [DayToDo!]
+  connectToDoId: String
   createdAt: String!
   updatedAt: String!
 }

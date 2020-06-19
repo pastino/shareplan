@@ -68,6 +68,31 @@ export default {
         .aggregate()
         .count();
     },
+    dayToDoesCount: (parent) => {
+      const { id } = parent;
+      return prisma
+        .dayToDoesConnection({ where: { goal: { id } } })
+        .aggregate()
+        .count();
+    },
+    dayToDoComCount: (parent) => {
+      const { id } = parent;
+      return prisma
+        .dayToDoesConnection({
+          where: { AND: [{ goal: { id } }, { complete: true }] },
+        })
+        .aggregate()
+        .count();
+    },
+    historyPubCount: (parent) => {
+      const { id } = parent;
+      return prisma
+        .postsConnection({
+          where: { AND: [{ goal: { id } }, { postPrivate: true }] },
+        })
+        .aggregate()
+        .count();
+    },
   },
   Post: {
     isLiked: (parent, _, { request }) => {

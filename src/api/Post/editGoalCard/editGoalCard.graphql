@@ -3,6 +3,8 @@ type Mutation {
     goalId: String!
     goalText: String
     dDay: String
+    startDate: String
+    keyWord: String
     category: String
     detailCategory: String
     cardColor: String

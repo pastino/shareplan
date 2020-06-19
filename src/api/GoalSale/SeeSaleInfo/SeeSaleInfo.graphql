@@ -1,0 +1,3 @@
+type Query {
+  seeSaleInfo(goalId: String!): Goal!
+}

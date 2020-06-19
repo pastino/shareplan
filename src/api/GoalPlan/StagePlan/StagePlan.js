@@ -1,6 +1,5 @@
 import { isAuthenticated } from "../../../middleware";
 import { prisma } from "../../../../generated/prisma-client";
-import { DAYTODO_FRAGMENT } from "../../../fragments";
 
 export default {
   Mutation: {
@@ -9,15 +8,21 @@ export default {
       const { user } = request;
       const { stagePlanText, startingDay, endDay, goalId } = args;
 
-      for (let i = 0; i < stagePlanText.length; i++) {
-        await prisma.createDetailPlan({
-          goal: { connect: { id: goalId } },
-          stagePlanText: stagePlanText[i],
-          startingDay: startingDay[i],
-          endDay: endDay[i]
-        });
+      try {
+        for (let i = 0; i < stagePlanText.length; i++) {
+          console.log(goalId);
+          await prisma.createDetailPlan({
+            goal: { connect: { id: goalId } },
+            stagePlanText: stagePlanText[i],
+            startingDay: startingDay[i],
+            endDay: endDay[i],
+          });
+        }
+        return true;
+      } catch (e) {
+        console.log(e);
+        return false;
       }
-      return true;
-    }
-  }
+    },
+  },
 };

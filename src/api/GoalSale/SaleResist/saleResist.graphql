@@ -1,0 +1,13 @@
+type Mutation {
+  saleResist(
+    goalId: String!
+    salePrice: Int!
+    mainImage: String!
+    introduceText: String!
+    sale: String!
+    target: String!
+    otherCosts: Int!
+    otherCostsDesc: String
+    alramToken: String
+  ): Boolean!
+}

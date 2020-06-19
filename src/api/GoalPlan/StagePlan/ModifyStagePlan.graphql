@@ -1,0 +1,13 @@
+type Mutation {
+  modifyStagePlan(
+    goalId: String
+    stagePlanText: [String]!
+    startingDay: [String]!
+    endDay: [String]!
+    updatePlanNumber: Int
+    stagePlan: Int
+    updatePlanId: [String!]
+    deletePlanId: [String!]
+    modifyDivision: String!
+  ): Boolean!
+}

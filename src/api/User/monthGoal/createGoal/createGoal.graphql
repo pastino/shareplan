@@ -4,7 +4,13 @@ type Mutation {
     category: String
     detailCategory: String
     cardColor: String!
+    startDate: String!
     dDay: String!
     cardPrivate: Boolean!
+    keyword: String!
+    division: String
+    stagePlanText: [String!]
+    startingDay: [String!]
+    endDay: [String!]
   ): Boolean!
 }

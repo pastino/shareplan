@@ -1,0 +1,3 @@
+type Query {
+  seePlanToDo(goalId: String!): [DayToDo!]!
+}

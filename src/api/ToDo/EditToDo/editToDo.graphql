@@ -1,8 +1,17 @@
 type Mutation {
   editToDo(
     id: String!
-    toDoList: String
-    importEvent: String!
-    complete: Boolean
+    toDoList: String!
+    color: String!
+    startDate: String!
+    startTime: String
+    endDate: String!
+    endTime: String
+    deleteAlrams: [String!]
+    createAlrams: [Int!]
+    memo: String
+    goalId: String
+    categoryId: [Int!]
+    categoryTime: [Int!]
   ): DayToDo!
 }

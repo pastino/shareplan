@@ -1,7 +1,15 @@
 type Mutation {
   createDayToDo(
-    monthDay: String!
     toDoList: String!
-    importEvent: String!
+    color: String!
+    startDate: String!
+    startTime: String
+    endDate: String!
+    endTime: String
+    alrams: [Int!]
+    categoryId: [Int!]
+    memo: String
+    goalId: String
+    today: String!
   ): DayToDo!
 }

@@ -7,20 +7,74 @@ export default {
     createDayToDo: async (_, args, { request }) => {
       isAuthenticated(request);
       const { user } = request;
-      const { monthDay, toDoList, importEvent } = args;
-      const createdToDo = await prisma.dayToDoes({
-        where: { monthDay, user: { id: user.id } },
+      const {
+        toDoList,
+        color,
+        startDate,
+        startTime,
+        endDate,
+        endTime,
+        alrams,
+        categoryId,
+        memo,
+        goalId,
+        today,
+      } = args;
+      const test = await prisma.dayToDoes({
+        where: { user: { id: user.id } },
       });
-      return await prisma
-        .createDayToDo({
-          user: { connect: { id: user.id } },
-          monthDay,
-          toDoList,
-          importEvent,
-          complete: false,
-          index: parseInt(createdToDo.length + 1),
-        })
-        .$fragment(DAYTODO_FRAGMENT);
+      const tetest = test.filter(
+        (toDo) => toDo.startDate <= today && toDo.endDate <= today
+      );
+
+      const tttt = tetest.map((toDo) => toDo.index);
+      const max = tetest.length === 0 ? 0 : Math.max.apply(null, tttt);
+
+      console.log(alrams, categoryId);
+
+      if (alrams !== null) {
+        const toDo = await prisma
+          .createDayToDo({
+            user: { connect: { id: user.id } },
+            toDoList,
+            color,
+            startDate,
+            startTime,
+            endDate,
+            endTime,
+            memo,
+            goal: !goalId ? null : { connect: { id: goalId } },
+            complete: false,
+            index: null,
+          })
+          .$fragment(DAYTODO_FRAGMENT);
+        for (let i = 0; i < alrams.length; i++) {
+          await prisma.createAlram({
+            time: alrams[i],
+            categoryId: categoryId[i],
+            dayToDo: { connect: { id: toDo.id } },
+          });
+        }
+        return await prisma
+          .dayToDo({ id: toDo.id })
+          .$fragment(DAYTODO_FRAGMENT);
+      } else {
+        return await prisma
+          .createDayToDo({
+            user: { connect: { id: user.id } },
+            toDoList,
+            color,
+            startDate,
+            startTime,
+            endDate,
+            endTime,
+            memo,
+            goal: !goalId ? null : { connect: { id: goalId } },
+            complete: false,
+            index: null,
+          })
+          .$fragment(DAYTODO_FRAGMENT);
+      }
     },
   },
 };

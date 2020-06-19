@@ -1,0 +1,8 @@
+type Mutation {
+  toDoPlanCreate(
+    goalId: String!
+    monthDay: [String!]!
+    toDoList: String!
+    importEvent: String!
+  ): [DayToDo!]!
+}

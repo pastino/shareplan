@@ -72,8 +72,70 @@ export const POST_FRAGMENT = `
         }
         commentCounts
         repplyCounts
+        connectToDoId
         createdAt
         updatedAt
+`;
+
+export const POST_HISTORY_FRAGMENT = `
+    fragment HistoryParts on Post {
+        id
+        title
+        caption
+        postPrivate
+        user {
+          ${USER_FRAGMENT}
+        }
+        files {
+          id
+          url
+        }
+        likes {
+          id
+          user {
+            ${USER_FRAGMENT}
+          }
+        }
+        goal {
+          id
+        }
+        isLiked
+        likeCount
+        assortment
+        goalInformation{
+          id
+        }
+        goalHistory{
+          id
+        }
+        comments {
+          id
+          text
+          user {
+            id
+            nickname
+            avatar
+          }
+          createdAt
+          updatedAt
+          repply {
+            id
+            text
+            user {
+              id
+              nickname
+              avatar
+            }
+            createdAt
+            updatedAt
+          }
+        }
+        commentCounts
+        repplyCounts
+        createdAt
+        updatedAt
+    }
+      
 `;
 
 export const GOAL_FRAGMENT = `
@@ -123,10 +185,12 @@ export const GOAL_FRAGMENT = `
         nickname
         avatar
       }
+      keyWord
       viewCounts
       excellentCounts
       luckyCounts
       favoriteCounts
+      downloadCount
       complete
       completeDate
       createdAt
@@ -324,6 +388,7 @@ export const FULL_CARD_FRAGMENT = `
         ${USER_FRAGMENT}
       }
       goalText
+      startDate
       dDay
       posts {
         id
@@ -345,6 +410,9 @@ export const FULL_CARD_FRAGMENT = `
       }
       detailPlans {
         id
+        stagePlanText
+        startingDay
+        endDay
       }
       category
       detailCategory
@@ -363,16 +431,26 @@ export const FULL_CARD_FRAGMENT = `
         nickname
         avatar
       }
+      
       viewCounts
+      keyWord
       goalCommentsCount
       goalReppliesCount
       excellentCounts
       luckyCounts
       favoriteCounts
+      downloadCount
       cardColor
       cardPrivate
       complete
       completeDate
+      sale
+      salePrice
+      mainImage
+      introduceText
+      target
+      otherCosts
+      otherCostsDesc
       createdAt
       updatedAt
     }
@@ -422,6 +500,7 @@ export const SEE_USER_FRAGMENT = `
           }
           goalText
           dDay
+          startDate
           goalInformations {
             id
             information {
@@ -436,8 +515,13 @@ export const SEE_USER_FRAGMENT = `
           }
           detailPlans {
             id
+            stagePlanText
+            startingDay
+            endDay
           }
+          downloadCount
           category
+          keyWord
           viewCounts
           goalCommentsCount
           goalReppliesCount
@@ -461,20 +545,41 @@ export const SEE_USER_FRAGMENT = `
             nickname
             avatar
           }
+          sale
+          salePrice
+          mainImage
+          introduceText
+          target
+          otherCosts
+          otherCostsDesc
           createdAt
           updatedAt
         }
         dayToDoes {
           id
-          monthDay
+          startDate
+          startTime
+          endDate
+          endTime
+          alrams {
+            id
+            time
+            dayToDo{
+              id
+            }
+          }
+          memo
           user {
             id
           }
           toDoList
           complete
-          importEvent
-          createdAt
-          updatedAt
+          color
+          index
+          goal {
+            id
+            goalText
+          }
         }
         following {
           id
@@ -588,17 +693,31 @@ export const ROOM_FRAGMENT = `
 
 export const DAYTODO_FRAGMENT = `
   fragment DayToDoParts on DayToDo {
+      id
+      startDate
+      startTime
+      endDate
+      endTime
+      alrams {
         id
-        monthDay
-        user {
+        time
+        categoryId
+        dayToDo{
           id
         }
-        toDoList
-        complete
-        index
-        importEvent
-        createdAt
-        updatedAt
+      }
+      memo
+      user {
+        id
+      }
+      toDoList
+      complete
+      color
+      index
+      goal {
+        id
+        goalText
+      }
   }
 `;
 
