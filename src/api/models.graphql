@@ -187,6 +187,7 @@ type DayToDo {
   color: String!
   index: Int
   goal: Goal
+  posts: [Post]
   createdAt: String!
   updatedAt: String!
 }
@@ -209,6 +210,7 @@ type Post {
   comments: [Comment!]!
   repplies: [Repply!]!
   goal: Goal!
+  dayTodo: DayToDo!
   commentCounts: Int
   repplyCounts: Int
   postPrivate: Boolean!
@@ -217,7 +219,6 @@ type Post {
   goalInformation: GoalInformation
   goalHistory: GoalHistory
   dayToDoes: [DayToDo!]
-  connectToDoId: String
   createdAt: String!
   updatedAt: String!
 }
@@ -254,6 +255,7 @@ type File {
   id: ID!
   url: String!
   post: Post!
+  postRatio: Float
   createdAt: String!
   updatedAt: String!
 }

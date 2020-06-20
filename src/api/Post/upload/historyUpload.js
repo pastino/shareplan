@@ -1,6 +1,6 @@
 import { isAuthenticated } from "../../../middleware";
 import { prisma } from "../../../../generated/prisma-client";
-import { POST_HISTORY_FRAGMENT } from "../../../fragments";
+import { POST_HISTORY_FRAGMENT, DAYTODO_FRAGMENT } from "../../../fragments";
 
 export default {
   Mutation: {
@@ -9,6 +9,7 @@ export default {
       const {
         caption,
         files,
+        postRatio,
         title,
         assortment,
         goalHistoryId,
@@ -17,6 +18,7 @@ export default {
         toDoId,
       } = args;
       const { user } = request;
+      console.log(postRatio);
       const post = await prisma
         .createPost({
           goalHistory: { connect: { id: goalHistoryId } },
@@ -24,7 +26,7 @@ export default {
           assortment,
           caption,
           postPrivate,
-          connectToDoId: toDoId,
+          dayTodo: { connect: { id: toDoId } },
           goal: { connect: { id: goalId } },
           user: { connect: { id: user.id } },
         })
@@ -42,17 +44,18 @@ export default {
       }
       try {
         if (files && files.length > 0) {
-          files.forEach(async (file) => {
+          for (let i = 0; i < files.length; i++) {
             await prisma.createFile({
-              url: file,
+              url: files[i],
+              postRatio: postRatio[i],
               post: { connect: { id: post.id } },
             });
-          });
+          }
         }
       } catch (e) {
         console.log(e);
       }
-      return post;
+      return await prisma.dayToDo({ id: toDoId }).$fragment(DAYTODO_FRAGMENT);
     },
   },
 };

@@ -3,10 +3,11 @@ type Mutation {
     title: String!
     caption: String
     files: [String!]
+    postRatio: [Float!]
     assortment: String!
     goalHistoryId: String!
     postPrivate: Boolean!
     goalId: String!
     toDoId: String
-  ): Post!
+  ): DayToDo!
 }

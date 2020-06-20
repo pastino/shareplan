@@ -186,6 +186,7 @@ type DayToDo {
   color: String!
   index: Int
   goal: Goal @relation(name: "DayToDoOfGoal")
+  posts: [Post] @relation(name: "DayToDoOfPost")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -207,6 +208,7 @@ type Post {
   isLiked: Boolean
   likeCount: Int
   goal: Goal! @relation(name: "PostsOfGoal")
+  dayTodo: DayToDo! @relation(name: "DayToDoOfPost")
   comments: [Comment!]! @relation(name: "CommentsOfPost" onDelete: CASCADE)
   repplies: [Repply!]! @relation(name: "ReppliesOfPost" onDelete: CASCADE)
   commentCounts: Int
@@ -215,7 +217,6 @@ type Post {
   assortment: String!
   goalInformation: GoalInformation @relation(name: "PostsOfInformation")
   goalHistory: GoalHistory @relation(name: "PostsOfHistory")
-  connectToDoId: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -252,6 +253,7 @@ type File {
   id: ID! @id 
   url: String! 
   post: Post @relation(name: "FilesOfPost")
+  postRatio: Float
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

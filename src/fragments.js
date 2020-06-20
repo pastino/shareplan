@@ -72,7 +72,6 @@ export const POST_FRAGMENT = `
         }
         commentCounts
         repplyCounts
-        connectToDoId
         createdAt
         updatedAt
 `;
@@ -89,6 +88,7 @@ export const POST_HISTORY_FRAGMENT = `
         files {
           id
           url
+          postRatio
         }
         likes {
           id
@@ -97,6 +97,9 @@ export const POST_HISTORY_FRAGMENT = `
           }
         }
         goal {
+          id
+        }
+        dayTodo {
           id
         }
         isLiked
@@ -717,6 +720,10 @@ export const DAYTODO_FRAGMENT = `
       goal {
         id
         goalText
+      }
+      posts {
+        id
+        title
       }
   }
 `;

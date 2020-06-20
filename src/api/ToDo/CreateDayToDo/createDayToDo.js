@@ -30,8 +30,6 @@ export default {
       const tttt = tetest.map((toDo) => toDo.index);
       const max = tetest.length === 0 ? 0 : Math.max.apply(null, tttt);
 
-      console.log(alrams, categoryId);
-
       if (alrams !== null) {
         const toDo = await prisma
           .createDayToDo({
