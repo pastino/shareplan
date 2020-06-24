@@ -18,7 +18,7 @@ export default {
         toDoId,
       } = args;
       const { user } = request;
-      console.log(postRatio);
+
       const post = await prisma
         .createPost({
           goalHistory: { connect: { id: goalHistoryId } },

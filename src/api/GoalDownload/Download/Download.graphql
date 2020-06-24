@@ -20,5 +20,6 @@ type Mutation {
     keyWord: String
     cardColor: String
     cardPrivate: Boolean
+    originToDoId: [String]
   ): Boolean!
 }

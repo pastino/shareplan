@@ -70,8 +70,6 @@ export const POST_FRAGMENT = `
             updatedAt
           }
         }
-        commentCounts
-        repplyCounts
         createdAt
         updatedAt
 `;
@@ -133,8 +131,8 @@ export const POST_HISTORY_FRAGMENT = `
             updatedAt
           }
         }
-        commentCounts
-        repplyCounts
+        
+        
         createdAt
         updatedAt
     }
@@ -143,36 +141,39 @@ export const POST_HISTORY_FRAGMENT = `
 
 export const GOAL_FRAGMENT = `
   fragment InformationParts on Goal {
-    id
-    user {
       id
-      avatar
-      nickname
-    }
-    posts{
-      id
-      createdAt
-      postPrivate
-    }
-    goalInformations {
-      id
-      information {
-        ${POST_FRAGMENT}
+      user {
+        ${USER_FRAGMENT}
       }
-      createdAt
-      updatedAt
-      }
-      goalHistories { 
+      goalText
+      startDate
+      dDay
+      posts {
         id
-      history {
-        ${POST_FRAGMENT}
+        createdAt
+        postPrivate
+        assortment
       }
-      createdAt
-      updatedAt
-      }
-      detailPlans { 
+      goalInformations {
         id
+        information {
+          ${POST_FRAGMENT}
+        }
       }
+      goalHistories {     
+        id
+        history {
+          ${POST_FRAGMENT}
+        }
+      }
+      detailPlans {
+        id
+        stagePlanText
+        startingDay
+        endDay
+      }
+      category
+      detailCategory
       excellents{
         id
         nickname
@@ -188,14 +189,26 @@ export const GOAL_FRAGMENT = `
         nickname
         avatar
       }
-      keyWord
       viewCounts
+      keyWord
+      goalCommentsCount
+      goalReppliesCount
       excellentCounts
       luckyCounts
       favoriteCounts
       downloadCount
+      cardColor
+      cardPrivate
       complete
       completeDate
+      sale
+      salePrice
+      mainImage
+      introduceText
+      target
+      otherCosts
+      otherCostsDesc
+      purchase
       createdAt
       updatedAt
   }
@@ -285,8 +298,8 @@ export const TALK_FRAGMENT = `
       ${USER_FRAGMENT}
     }
     talkText
-    talkCommentCounts
-    talkRepplyCounts
+    talk
+    talk
     talkComments {
       id
       user {
@@ -434,7 +447,6 @@ export const FULL_CARD_FRAGMENT = `
         nickname
         avatar
       }
-      
       viewCounts
       keyWord
       goalCommentsCount
@@ -555,6 +567,7 @@ export const SEE_USER_FRAGMENT = `
           target
           otherCosts
           otherCostsDesc
+          purchase
           createdAt
           updatedAt
         }
@@ -579,6 +592,7 @@ export const SEE_USER_FRAGMENT = `
           complete
           color
           index
+          originToDoId
           goal {
             id
             goalText
@@ -717,6 +731,7 @@ export const DAYTODO_FRAGMENT = `
       complete
       color
       index
+      originToDoId
       goal {
         id
         goalText

@@ -84,6 +84,15 @@ export default {
         .aggregate()
         .count();
     },
+    historyCount: (parent) => {
+      const { id } = parent;
+      return prisma
+        .postsConnection({
+          where: { AND: [{ goal: { id } }] },
+        })
+        .aggregate()
+        .count();
+    },
     historyPubCount: (parent) => {
       const { id } = parent;
       return prisma

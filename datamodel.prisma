@@ -114,6 +114,7 @@ type Goal {
   luckyCounts: Int
   favoriteCounts: Int
   downloadCount: Int
+  purchase: Boolean
   sale: String
   salePrice: Int
   mainImage: String
@@ -186,7 +187,8 @@ type DayToDo {
   color: String!
   index: Int
   goal: Goal @relation(name: "DayToDoOfGoal")
-  posts: [Post] @relation(name: "DayToDoOfPost")
+  originToDoId: String
+  posts: [Post] @relation(name: "DayToDoOfPost" onDelete: CASCADE )
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -208,12 +210,10 @@ type Post {
   isLiked: Boolean
   likeCount: Int
   goal: Goal! @relation(name: "PostsOfGoal")
-  dayTodo: DayToDo! @relation(name: "DayToDoOfPost")
+  dayTodo: DayToDo! @relation(name: "DayToDoOfPost" )
   comments: [Comment!]! @relation(name: "CommentsOfPost" onDelete: CASCADE)
   repplies: [Repply!]! @relation(name: "ReppliesOfPost" onDelete: CASCADE)
-  commentCounts: Int
   postPrivate: Boolean!
-  repplyCounts: Int
   assortment: String!
   goalInformation: GoalInformation @relation(name: "PostsOfInformation")
   goalHistory: GoalHistory @relation(name: "PostsOfHistory")

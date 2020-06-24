@@ -90,6 +90,7 @@ type Goal {
   posts: [Post!]!
   goalInformations: GoalInformation
   goalHistories: GoalHistory
+  historyCount: Int
   historyPubCount: Int
   detailPlans: [DetailPlan!]
   category: String
@@ -116,6 +117,7 @@ type Goal {
   luckyCounts: Int!
   favoriteCounts: Int!
   downloadCount: Int
+  purchase: Boolean
   sale: String
   salePrice: Int
   target: String
@@ -187,6 +189,7 @@ type DayToDo {
   color: String!
   index: Int
   goal: Goal
+  originToDoId: String
   posts: [Post]
   createdAt: String!
   updatedAt: String!

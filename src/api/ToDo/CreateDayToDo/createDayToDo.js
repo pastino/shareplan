@@ -42,6 +42,7 @@ export default {
             endTime,
             memo,
             goal: !goalId ? null : { connect: { id: goalId } },
+            originToDoId: null,
             complete: false,
             index: null,
           })
@@ -69,6 +70,7 @@ export default {
             memo,
             goal: !goalId ? null : { connect: { id: goalId } },
             complete: false,
+            originToDoId: null,
             index: null,
           })
           .$fragment(DAYTODO_FRAGMENT);

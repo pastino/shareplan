@@ -27,6 +27,7 @@ export default {
         keyWord,
         cardColor,
         cardPrivate,
+        originToDoId,
       } = args;
       const { user } = request;
 
@@ -45,6 +46,7 @@ export default {
           favoriteCounts: 0,
           excellentCounts: 0,
           postUploadDate: today,
+          purchase: true,
           keyWord,
         });
         await prisma.createGoalInformation({
@@ -63,6 +65,7 @@ export default {
             endDate: endDate[i],
             endTime: endTime[i] !== null ? endTime[i] : null,
             memo: memo[i] !== null ? memo[i] : null,
+            originToDoId: originToDoId[i],
             user: { connect: { id: user.id } },
             complete: false,
             goal: { connect: { id: goal.id } },
@@ -81,7 +84,7 @@ export default {
         if (maxEndDate !== null) {
           await prisma.updateGoal({
             where: { id: goalId },
-            data: { dDay: maxEndDate },
+            data: { dDay: maxEndDate, purchase: true },
           });
         }
         for (let i = 0; i < toDoList.length; i++) {
@@ -93,6 +96,7 @@ export default {
             endDate: endDate[i],
             endTime: endTime[i] !== null ? endTime[i] : null,
             memo: memo[i] !== null ? memo[i] : null,
+            originToDoId: originToDoId[i],
             user: { connect: { id: user.id } },
             complete: false,
             goal: { connect: { id: goalId } },

@@ -5,6 +5,8 @@ type Mutation {
     title: String
     postPrivate: Boolean
     goalId: String
-    latestCreatedAt: String
-  ): Post!
+    toDoId: String
+    files: [String!]
+    postRatio: [Float!]
+  ): DayToDo!
 }
