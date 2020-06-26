@@ -1,11 +1,12 @@
 import { isAuthenticated } from "../../../middleware";
 import { prisma } from "../../../../generated/prisma-client";
+import { DAYTODO_FRAGMENT } from "../../../fragments";
 
 export default {
   Mutation: {
     deletePost: async (_, args, { request }) => {
       isAuthenticated(request);
-      const { id, goalId } = args;
+      const { id, goalId, toDoId } = args;
       const { user } = request;
       const verify = await prisma.$exists.post({
         AND: [
@@ -21,7 +22,9 @@ export default {
       const publicPostArray = goalPosts.map((post) => post.createdAt);
 
       const latestCreatedAt =
-        publicPostArray === 0
+        publicPostArray.length === 0 ||
+        publicPostArray === null ||
+        publicPostArray === undefined
           ? new Date(0, 0, 0)
           : publicPostArray &&
             publicPostArray.reduce(function(previous, current) {
@@ -40,7 +43,8 @@ export default {
             },
           });
         }
-        return true;
+
+        return prisma.dayToDo({ id: toDoId }).$fragment(DAYTODO_FRAGMENT);
       } catch (e) {
         console.log(e);
       }

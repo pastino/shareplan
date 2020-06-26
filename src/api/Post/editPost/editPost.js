@@ -42,7 +42,7 @@ export default {
         });
         const publicPostArray = goalPosts.map((post) => post.createdAt);
         const latestCreatedAt =
-          publicPostArray === 0
+          publicPostArray.length === 0
             ? new Date(0, 0, 0)
             : publicPostArray &&
               publicPostArray.reduce(function(previous, current) {

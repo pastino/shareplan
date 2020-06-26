@@ -735,6 +735,7 @@ export const DAYTODO_FRAGMENT = `
       goal {
         id
         goalText
+        sale
       }
       posts {
         id
