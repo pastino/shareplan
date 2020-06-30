@@ -1,0 +1,3 @@
+type Query {
+  seeHistory(pageNumber: Int!, items: Int!): [Post!]!
+}

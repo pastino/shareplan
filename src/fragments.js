@@ -17,6 +17,7 @@ export const USER_FRAGMENT = `
           updatedAt
         }    
 `;
+SEE_USER_FRAGMENT;
 
 export const POST_FRAGMENT = `
         id
@@ -131,7 +132,6 @@ export const POST_HISTORY_FRAGMENT = `
             updatedAt
           }
         }
-        
         
         createdAt
         updatedAt

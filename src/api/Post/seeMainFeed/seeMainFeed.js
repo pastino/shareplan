@@ -8,13 +8,13 @@ export default {
       isAuthenticated(request);
       const { pageNumber, items, filtering, ordering } = args;
       const { user } = request;
-      console.log(filtering, ordering);
+
       try {
         if (filtering === "전체") {
           return prisma
             .goals({
               where: {
-                AND: [{ user: { id_not: user.id } }, { cardPrivate: true }],
+                AND: [{ cardPrivate: true }],
               },
               first: items,
               skip: pageNumber,

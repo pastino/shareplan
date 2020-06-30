@@ -1,6 +1,6 @@
 import { isAuthenticated } from "../../../middleware";
 import { prisma } from "../../../../generated/prisma-client";
-import { LIKE_FRAGMENT } from "../../../fragments";
+import { LIKE_FRAGMENT, POST_HISTORY_FRAGMENT } from "../../../fragments";
 
 export default {
   Mutation: {
@@ -12,39 +12,44 @@ export default {
         AND: [
           {
             user: {
-              id: user.id
-            }
+              id: user.id,
+            },
           },
           {
             post: {
-              id: postId
-            }
-          }
-        ]
+              id: postId,
+            },
+          },
+        ],
       };
       const existing = await prisma.$exists.like(fillterExitsting);
-      try {
-        if (existing) {
-          await prisma.deleteManyLikes(fillterExitsting);
-        } else {
-          await prisma.createLike({
+      const post = await prisma
+        .post({ id: postId })
+        .$fragment(POST_HISTORY_FRAGMENT);
+
+      const likes = post.likes;
+
+      if (existing) {
+        const deleteId = likes.filter((like) => like.user.id === user.id)[0].id;
+        return await prisma
+          .deleteLike({ id: deleteId })
+          .$fragment(LIKE_FRAGMENT);
+      } else {
+        return await prisma
+          .createLike({
             user: {
               connect: {
-                id: user.id
-              }
+                id: user.id,
+              },
             },
             post: {
               connect: {
-                id: postId
-              }
-            }
-          });
-          return true;
-        }
-      } catch (error) {
-        console.log(error);
-        return false;
+                id: postId,
+              },
+            },
+          })
+          .$fragment(LIKE_FRAGMENT);
       }
-    }
-  }
+    },
+  },
 };
