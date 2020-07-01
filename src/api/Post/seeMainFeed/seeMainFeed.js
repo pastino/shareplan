@@ -37,7 +37,10 @@ export default {
               where: {
                 AND: [
                   {
-                    user: { id_in: [...souling.map((user) => user.id)] },
+                    user: {
+                      id_in: [...souling.map((user) => user.id)],
+                      id_not: user.id,
+                    },
                   },
                   { cardPrivate: true },
                 ],
