@@ -17,7 +17,6 @@ export const USER_FRAGMENT = `
           updatedAt
         }    
 `;
-SEE_USER_FRAGMENT;
 
 export const POST_FRAGMENT = `
         id
@@ -32,15 +31,12 @@ export const POST_FRAGMENT = `
           url
         }
         likes {
-          id
-          user {
-            ${USER_FRAGMENT}
-          }
+          ${USER_FRAGMENT}
         }
         goal {
           id
         }
-        isLiked
+        
         likeCount
         assortment
         goalInformation{
@@ -90,10 +86,7 @@ export const POST_HISTORY_FRAGMENT = `
           postRatio
         }
         likes {
-          id
-          user {
-            ${USER_FRAGMENT}
-          }
+          ${USER_FRAGMENT}
         }
         goal {
           id
@@ -101,7 +94,7 @@ export const POST_HISTORY_FRAGMENT = `
         dayTodo {
           id
         }
-        isLiked
+        
         likeCount
         assortment
         goalInformation{
@@ -259,22 +252,6 @@ export const REPPLY_FRAGMENT = `
       }
       createdAt
       updatedAt
-  }
-`;
-
-export const LIKE_FRAGMENT = `
-  fragment LikeParts on Like {
-    id
-    user {
-      id 
-      nickname
-      avatar
-    }
-    post { 
-      id
-    }
-    createdAt
-    updatedAt
   }
 `;
 
@@ -634,7 +611,6 @@ export const SEE_USER_FRAGMENT = `
             id
             url
           }
-        
           likes {
             id
           }
@@ -740,6 +716,7 @@ export const DAYTODO_FRAGMENT = `
       posts {
         id
         title
+        postPrivate
       }
   }
 `;

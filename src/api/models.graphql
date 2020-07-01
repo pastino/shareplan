@@ -19,7 +19,7 @@ type User {
   isSelf: Boolean #Computed
   posts: [Post!]!
   postCounts: Int
-  likes: [Like!]!
+  likes: [Post!]!
   comments: [Comment!]!
   goalCounts: Int
   goalComments: [GoalComment!]!
@@ -208,7 +208,7 @@ type Post {
   caption: String!
   user: User!
   files: [File!]
-  likes: [Like!]!
+  likes: [User!]
   likeCount: Int!
   comments: [Comment!]!
   repplies: [Repply!]!
@@ -218,18 +218,9 @@ type Post {
   repplyCounts: Int
   postPrivate: Boolean!
   assortment: String!
-  isLiked: Boolean! #Computed
   goalInformation: GoalInformation
   goalHistory: GoalHistory
   dayToDoes: [DayToDo!]
-  createdAt: String!
-  updatedAt: String!
-}
-
-type Like {
-  id: ID!
-  user: User!
-  post: Post!
   createdAt: String!
   updatedAt: String!
 }

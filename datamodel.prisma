@@ -25,7 +25,7 @@ type User {
   favorites: [Goal!]! @relation(name: "FavoriteOfUser" onDelete:CASCADE)
   luckies: [Goal!]! @relation(name: "LuckyOfUser" onDelete:CASCADE)
   dayToDoes: [DayToDo!]! @relation(name: "DayToDoOfUser" onDelete:CASCADE)
-  likes: [Like!]! @relation(name: "LikesOfUser" onDelete:CASCADE)
+  likes: [Post!]! @relation(name: "LikeOfUser" onDelete:CASCADE)
   comments: [Comment!]! @relation(name: "CommentsOfUser" onDelete:CASCADE)
   repplies:[Repply!]! @relation(name: "ReppliesOfUser" onDelete:CASCADE)
   rooms: [Room!]! 
@@ -206,8 +206,7 @@ type Post {
   caption: String!
   user: User @relation(name: "PostsOfUser")
   files: [File!]! @relation(name: "FilesOfPost" onDelete:CASCADE)
-  likes: [Like!]! @relation(name: "LikesOfPost" onDelete: CASCADE)
-  isLiked: Boolean
+  likes: [User!]! @relation(name: "LikeOfUser" onDelete: CASCADE)
   likeCount: Int
   goal: Goal! @relation(name: "PostsOfGoal")
   dayTodo: DayToDo! @relation(name: "DayToDoOfPost" )
@@ -221,13 +220,6 @@ type Post {
   updatedAt: DateTime! @updatedAt
 }
 
-type Like {
-  id: ID! @id 
-  user: User @relation(name: "LikesOfUser")
-  post: Post @relation(name: "LikesOfPost")
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-}
 
 type Comment {
   id: ID! @id 

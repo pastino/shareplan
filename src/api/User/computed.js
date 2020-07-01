@@ -104,22 +104,11 @@ export default {
     },
   },
   Post: {
-    isLiked: (parent, _, { request }) => {
+    likeCount: (parent, _, { request }) => {
       const { id } = parent;
       const { user } = request;
-      return prisma.$exists.like({
-        AND: [
-          { user: { id: user.id } },
-          {
-            post: { id },
-          },
-        ],
-      });
-    },
-    likeCount: (parent) => {
-      const { id } = parent;
       return prisma
-        .likesConnection({ where: { post: { id } } })
+        .usersConnection({ where: { id: user.id } })
         .aggregate()
         .count();
     },
