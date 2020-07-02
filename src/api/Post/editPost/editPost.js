@@ -17,16 +17,6 @@ export default {
         toDoId,
       } = args;
 
-      console.log(
-        id,
-        caption,
-        title,
-        postPrivate,
-        goalId,
-        files,
-        postRatio,
-        toDoId
-      );
       const { user } = request;
       const verify = await prisma.$exists.post({
         AND: [
@@ -83,7 +73,7 @@ export default {
             await prisma.createFile({
               url: files[i],
               postRatio: postRatio[i],
-              post: { connect: { id: post.id } },
+              post: { connect: { id } },
             });
           }
         } else if (files === []) {
