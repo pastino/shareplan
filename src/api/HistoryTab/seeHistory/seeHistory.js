@@ -9,7 +9,12 @@ export default {
       const { user } = request;
       const { pageNumber, items } = args;
       return prisma
-        .posts({ where: { postPrivate: true }, first: items, skip: pageNumber })
+        .posts({
+          where: { postPrivate: true },
+          first: items,
+          skip: pageNumber,
+          orderBy: "createdAt_DESC",
+        })
         .$fragment(POST_HISTORY_FRAGMENT);
     },
   },

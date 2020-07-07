@@ -13,13 +13,11 @@ export default {
               where: {
                 AND: [
                   {
-                    goalText_contains: term
+                    goalText_contains: term,
                   },
-                  {
-                    user: { id_not: user.id }
-                  },
-                  { cardPrivate: true }
-                ]
+
+                  { cardPrivate: true },
+                ],
               },
               first: items,
               skip: pageNumber,
@@ -32,7 +30,7 @@ export default {
                   ? "luckyCounts_DESC"
                   : ordering === "즐겨찾기"
                   ? "favoriteCounts_DESC"
-                  : null
+                  : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);
         } else if (tab === "소울링") {
@@ -42,13 +40,13 @@ export default {
               where: {
                 AND: [
                   {
-                    user: { id_in: [...souling.map(user => user.id)] }
+                    user: { id_in: [...souling.map((user) => user.id)] },
                   },
                   {
-                    goalText_contains: term
+                    goalText_contains: term,
                   },
-                  { cardPrivate: true }
-                ]
+                  { cardPrivate: true },
+                ],
               },
               first: items,
               skip: pageNumber,
@@ -61,7 +59,7 @@ export default {
                   ? "luckyCounts_DESC"
                   : ordering === "즐겨찾기"
                   ? "favoriteCounts_DESC"
-                  : null
+                  : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);
         } else if (tab === "완료") {
@@ -69,13 +67,12 @@ export default {
             .goals({
               where: {
                 AND: [
-                  { user: { id_not: user.id } },
                   { cardPrivate: true },
                   { complete: true },
                   {
-                    goalText_contains: term
-                  }
-                ]
+                    goalText_contains: term,
+                  },
+                ],
               },
               first: items,
               skip: pageNumber,
@@ -88,7 +85,7 @@ export default {
                   ? "luckyCounts_DESC"
                   : ordering === "즐겨찾기"
                   ? "favoriteCounts_DESC"
-                  : null
+                  : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);
         } else if (tab === "즐겨찾기") {
@@ -96,13 +93,12 @@ export default {
             .goals({
               where: {
                 AND: [
-                  { user: { id_not: user.id } },
                   { cardPrivate: true },
                   {
-                    goalText_contains: term
+                    goalText_contains: term,
                   },
-                  { favorites_some: { id: user.id } }
-                ]
+                  { favorites_some: { id: user.id } },
+                ],
               },
               first: items,
               skip: pageNumber,
@@ -115,13 +111,13 @@ export default {
                   ? "luckyCounts_DESC"
                   : ordering === "즐겨찾기"
                   ? "favoriteCounts_DESC"
-                  : null
+                  : null,
             })
             .$fragment(FULL_CARD_FRAGMENT);
         }
       } catch (e) {
         console.log(e);
       }
-    }
-  }
+    },
+  },
 };

@@ -120,15 +120,18 @@ export default {
             goal.downloadCount === null ? 1 : goal.downloadCount + 1,
         },
       });
-      const goalAlarmToken = goal.alramToken;
-      const { data } = await axios.post(
-        "https://exp.host/--/api/v2/push/send",
-        {
-          to: goalAlarmToken,
-          title: goal.goalText,
-          body: `등록하신 서비스에 주문이 접수되었습니다.`,
-        }
-      );
+      if (goal.alramToken !== undefined && goal.alramToken !== null) {
+        const goalAlarmToken = goal.alramToken;
+        const { data } = await axios.post(
+          "https://exp.host/--/api/v2/push/send",
+          {
+            to: goalAlarmToken,
+            title: goal.goalText,
+            body: `등록하신 목표카드가 공유(다운로드) 되었습니다.`,
+          }
+        );
+      } 
+      
       return true;
     },
   },
