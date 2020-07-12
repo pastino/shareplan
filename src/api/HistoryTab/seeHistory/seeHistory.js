@@ -13,7 +13,7 @@ export default {
           where: { postPrivate: true },
           first: items,
           skip: pageNumber,
-          orderBy: "createdAt_DESC",
+          orderBy: "createdAt_ASC",
         })
         .$fragment(POST_HISTORY_FRAGMENT);
     },
