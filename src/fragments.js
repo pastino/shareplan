@@ -125,7 +125,6 @@ export const POST_HISTORY_FRAGMENT = `
             updatedAt
           }
         }
-        
         createdAt
         updatedAt
     }
